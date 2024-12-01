@@ -5,16 +5,16 @@ import * as popup from'./scripts/modal.js';
 const profileTitle = document.querySelector('.profile__title');
 const profileDescription = document.querySelector('.profile__description');
 
-const popupCloseB = document.querySelectorAll('.popup__close');
+const popupCloseButton = document.querySelectorAll('.popup__close');
 
 const popupEdit = document.querySelector('.popup_type_edit');
-const profileEditB = document.querySelector('.profile__edit-button');
+const profileEditButton = document.querySelector('.profile__edit-button');
 const editProfileForm = document.forms.edit_profile;
 const profileDescriptionInput = editProfileForm.elements.description;
 const profileNameInput = editProfileForm.elements.name;
 
 const popupAddNewCard = document.querySelector('.popup_type_new-card');
-const addB = document.querySelector('.profile__add-button');
+const addButton = document.querySelector('.profile__add-button');
 const addNewPlaceForm = document.forms.new_place;
 const newPlaseNameInput = addNewPlaceForm.elements.place_name;
 const newPlaseLinkInput = addNewPlaceForm.elements.link;
@@ -25,10 +25,10 @@ const popupTypeImgImage = document.querySelector('.popup__image');
 
 function showCards()
 {
-  cards.initialCards.forEach(item => cards.append(cards.create(item, cards.delete, cards.like, openPopupTypeImg)));
+  cards.initialCards.forEach(item => appendCard(cards.create(item, delElement, cards.like, openPopupTypeImg)));
 }
 
-popupCloseB.forEach((button) => {
+popupCloseButton.forEach((button) => {
   button.addEventListener('click', () => {
     const openedPopup = document.querySelector('.popup_is-opened');
     if (openedPopup)
@@ -38,7 +38,7 @@ popupCloseB.forEach((button) => {
   });
 });
 
-profileEditB.addEventListener('click', openPopupEdit);
+profileEditButton.addEventListener('click', openPopupEdit);
 function openPopupEdit()
 {
   profileNameInput.value = profileTitle.textContent;
@@ -55,7 +55,7 @@ function handleFormSubmit(evt)
   popup.close(popupEdit);
 }
 
-addB.addEventListener('click', openPopupAddNewCard);
+addButton.addEventListener('click', openPopupAddNewCard);
 function openPopupAddNewCard()
 {
   popup.open(popupAddNewCard)
@@ -65,7 +65,7 @@ addNewPlaceForm.addEventListener('submit', addNewPlaseHandler);
 function addNewPlaseHandler(evt)
 {
   evt.preventDefault();
-  cards.prepend(cards.create({name: newPlaseNameInput.value, link: newPlaseLinkInput.value}, cards.delete, cards.like, openPopupTypeImg));
+  prependCard(cards.create({name: newPlaseNameInput.value, link: newPlaseLinkInput.value}, delElement, cards.like, openPopupTypeImg));
   popup.close(popupAddNewCard);
   addNewPlaceForm.reset();
 }
@@ -79,6 +79,21 @@ function openPopupTypeImg(evt)
   popupTypeImgImage.alt = image.alt;
   popupTypeImgCaption.textContent = titleText;
   popup.open(popupTypeImg);
+}
+
+function appendCard(card)
+{
+  cards.placesList.append(card);
+}
+
+function prependCard(card)
+{
+  cards.placesList.prepend(card);
+}
+
+function delElement(element)
+{
+  element.remove();
 }
 
 showCards();

@@ -1,59 +1,43 @@
 function openPopupHandler(popup) {
   openPopup(popup);
-  addClosingOnEsc(popup);
-  addClosingOnOverlay(popup);
+  document.addEventListener('keydown', closingOnEsc);
+  popup.addEventListener('click', closingOnOverlay);
 }
 
-function closePopupHandler(popup)
-{
-  removeClosingOnEsc(popup);
+function closePopupHandler(popup) {
+  removeClosingOnEsc();
   removeClosingOnOverlay(popup);
   closePopup(popup);
 }
 
-function addClosingOnEsc(popup)
-{
-  document.addEventListener('keydown', (evt) => closingOnEsc(evt, popup));
-}
-
-function closingOnEsc(evt, popup)
-{
-  if(evt.key === 'Escape')
-  {
-    closePopupHandler(popup);
-  }
-}
-
-function addClosingOnOverlay(popup)
-{
-  popup.addEventListener('click', (evt) => closingOnOverlay(evt, popup));
-}
-
-function closingOnOverlay(evt, popup)
-{
-  if(evt.target === evt.currentTarget)
-  {
-    closePopupHandler(popup);
-  }
-}
-
-function removeClosingOnEsc(popup)
-{
+function removeClosingOnEsc() {
   document.removeEventListener('keydown', closingOnEsc);
 }
 
-function removeClosingOnOverlay(popup)
-{
+function removeClosingOnOverlay(popup) {
   popup.removeEventListener('click', closingOnOverlay);
 }
 
-function openPopup(popup)
-{
+function closingOnEsc(evt) {
+  if (evt.key === 'Escape') {
+    const openPopupElement = document.querySelector('.popup_is-opened');
+    if (openPopupElement) {
+      closePopupHandler(openPopupElement);
+    }
+  }
+}
+
+function closingOnOverlay(evt) {
+  if (evt.target === evt.currentTarget) {
+    closePopupHandler(evt.currentTarget);
+  }
+}
+
+function openPopup(popup) {
   popup.classList.add('popup_is-opened');
 }
 
-function closePopup(popup)
-{
+function closePopup(popup) {
   popup.classList.remove('popup_is-opened');
 }
 
