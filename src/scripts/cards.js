@@ -42,10 +42,13 @@ function createCard(cardDate, delElement, likeCard, openImg)
   return cardElement;
 }
 
-
-
 function likeCard(evt) {
   evt.target.classList.toggle('card__like-button_is-active');
 }
 
-export {initialCards, placesList, createCard as create, likeCard as like};
+function delElement(element)
+{
+  element.remove();
+}
+
+export {initialCards, placesList, createCard as create, likeCard as like, delElement as delete};

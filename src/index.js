@@ -25,20 +25,9 @@ const popupTypeImgImage = document.querySelector('.popup__image');
 
 function showCards()
 {
-  cards.initialCards.forEach(item => appendCard(cards.create(item, delElement, cards.like, openPopupTypeImg)));
+  cards.initialCards.forEach(item => appendCard(cards.create(item, cards.delete, cards.like, openPopupTypeImg)));
 }
 
-popupCloseButton.forEach((button) => {
-  button.addEventListener('click', () => {
-    const openedPopup = document.querySelector('.popup_is-opened');
-    if (openedPopup)
-    {
-      popup.close(openedPopup);
-    }
-  });
-});
-
-profileEditButton.addEventListener('click', openPopupEdit);
 function openPopupEdit()
 {
   profileNameInput.value = profileTitle.textContent;
@@ -46,7 +35,6 @@ function openPopupEdit()
   popup.open(popupEdit);
 }
 
-editProfileForm.addEventListener('submit', handleFormSubmit);
 function handleFormSubmit(evt)
 {
   evt.preventDefault();
@@ -55,17 +43,15 @@ function handleFormSubmit(evt)
   popup.close(popupEdit);
 }
 
-addButton.addEventListener('click', openPopupAddNewCard);
 function openPopupAddNewCard()
 {
   popup.open(popupAddNewCard)
 }
 
-addNewPlaceForm.addEventListener('submit', addNewPlaseHandler);
 function addNewPlaseHandler(evt)
 {
   evt.preventDefault();
-  prependCard(cards.create({name: newPlaseNameInput.value, link: newPlaseLinkInput.value}, delElement, cards.like, openPopupTypeImg));
+  prependCard(cards.create({name: newPlaseNameInput.value, link: newPlaseLinkInput.value}, cards.delete, cards.like, openPopupTypeImg));
   popup.close(popupAddNewCard);
   addNewPlaceForm.reset();
 }
@@ -91,10 +77,20 @@ function prependCard(card)
   cards.placesList.prepend(card);
 }
 
-function delElement(element)
-{
-  element.remove();
-}
+popupCloseButton.forEach((button) => {
+  button.addEventListener('click', () => {
+    const openedPopup = document.querySelector('.popup_is-opened');
+    if (openedPopup)
+    {
+      popup.close(openedPopup);
+    }
+  });
+});
+
+profileEditButton.addEventListener('click', openPopupEdit);
+editProfileForm.addEventListener('submit', handleFormSubmit);
+addButton.addEventListener('click', openPopupAddNewCard);
+addNewPlaceForm.addEventListener('submit', addNewPlaseHandler);
 
 showCards();
 
