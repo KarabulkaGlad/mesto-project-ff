@@ -25,7 +25,6 @@ const initialCards = [
     }
 ];
 
-const placesList = document.querySelector('.places__list');
 const cardTamplate = document.querySelector('#card-template').content;
 
 
@@ -51,4 +50,4 @@ function delElement(element)
   element.remove();
 }
 
-export {initialCards, placesList, createCard as create, likeCard as like, delElement as delete};
+export {initialCards, createCard as create, likeCard as like, delElement as delete};

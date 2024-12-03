@@ -2,6 +2,8 @@ import './index.css';
 import * as cards from './scripts/cards.js';
 import * as popup from'./scripts/modal.js';
 
+const placesList = document.querySelector('.places__list');
+
 const profileTitle = document.querySelector('.profile__title');
 const profileDescription = document.querySelector('.profile__description');
 
@@ -69,12 +71,12 @@ function openPopupTypeImg(evt)
 
 function appendCard(card)
 {
-  cards.placesList.append(card);
+  placesList.append(card);
 }
 
 function prependCard(card)
 {
-  cards.placesList.prepend(card);
+  placesList.prepend(card);
 }
 
 popupCloseButton.forEach((button) => {
