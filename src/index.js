@@ -2,6 +2,7 @@ import './index.css';
 import * as cards from './scripts/cards.js';
 import * as popup from'./scripts/modal.js';
 import { enableValidation, clearValidation } from './scripts/validation.js';
+import * as api from './scripts/api.js';
 
 const placesList = document.querySelector('.places__list');
 
@@ -21,6 +22,7 @@ const enableValidationConfig = {
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__error_visible'
 };
+
 
 const profileTitle = document.querySelector('.profile__title');
 const profileDescription = document.querySelector('.profile__description');
