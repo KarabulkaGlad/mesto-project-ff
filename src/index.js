@@ -1,8 +1,26 @@
 import './index.css';
 import * as cards from './scripts/cards.js';
 import * as popup from'./scripts/modal.js';
+import { enableValidation, clearValidation } from './scripts/validation.js';
 
 const placesList = document.querySelector('.places__list');
+
+const clearValidationConfig = {
+  buttonClass: '.popup__button',
+  errorBlockClass: '.popup__input-error',
+  inputSelector: '.popup__input',
+  inputErrorClass: 'popup__input_type_error',
+  inactiveButtonClass: 'popup__button_disabled',
+  errorClass: "popup__error_visible"
+};
+const enableValidationConfig = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+};
 
 const profileTitle = document.querySelector('.profile__title');
 const profileDescription = document.querySelector('.profile__description');
@@ -34,6 +52,7 @@ function openPopupEdit()
 {
   profileNameInput.value = profileTitle.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
+  clearValidation(editProfileForm, clearValidationConfig);
   popup.open(popupEdit);
 }
 
@@ -47,7 +66,7 @@ function handleFormSubmit(evt)
 
 function openPopupAddNewCard()
 {
-  popup.open(popupAddNewCard)
+  popup.open(popupAddNewCard);
 }
 
 function addNewPlaseHandler(evt)
@@ -56,6 +75,7 @@ function addNewPlaseHandler(evt)
   prependCard(cards.create({name: newPlaseNameInput.value, link: newPlaseLinkInput.value}, cards.delete, cards.like, openPopupTypeImg));
   popup.close(popupAddNewCard);
   addNewPlaceForm.reset();
+  clearValidation(addNewPlaceForm, clearValidationConfig);
 }
 
 function openPopupTypeImg(evt)
@@ -94,5 +114,6 @@ editProfileForm.addEventListener('submit', handleFormSubmit);
 addButton.addEventListener('click', openPopupAddNewCard);
 addNewPlaceForm.addEventListener('submit', addNewPlaseHandler);
 
+enableValidation(enableValidationConfig);
 showCards();
 
