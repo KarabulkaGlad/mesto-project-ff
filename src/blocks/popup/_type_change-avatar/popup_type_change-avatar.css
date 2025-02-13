@@ -1,0 +1,9 @@
+.popup_type_change-avatar .popup__content {
+    display: flex;
+    flex-direction: column;
+    min-height: 272px;
+}
+
+.popup_type_change-avatar .popup__button  {
+    margin-top: 15px;
+}

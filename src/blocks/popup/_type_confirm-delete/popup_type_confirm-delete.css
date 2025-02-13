@@ -1,0 +1,13 @@
+.popup_type_confirm-delete .popup__content {
+    display: flex;
+    flex-direction: column;
+    min-height: 181px;
+}
+
+.popup_type_confirm-delete .popup__form {
+    margin-top: 28px;
+}
+
+.popup_type_confirm-delete .popup__button {
+    margin-top: 3px;
+} 
