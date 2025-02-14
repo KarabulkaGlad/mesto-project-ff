@@ -7,6 +7,7 @@ function showInputError(formElement, inputElement, errorMessage, config) {
 
 function hideInputError(formElement, inputElement, config) {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  inputElement.setCustomValidity("");
   inputElement.classList.remove(config.inputErrorClass);
   errorElement.classList.remove(config.errorClass);
   errorElement.textContent = '';

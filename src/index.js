@@ -3,6 +3,7 @@ import * as cards from './scripts/cards.js';
 import * as popup from'./scripts/modal.js';
 import { enableValidation, clearValidation } from './scripts/validation.js';
 import * as api from './scripts/api.js';
+import {cardUX, defaultUX} from './scripts/utils.js';
 
 const clearValidationConfig = {
   buttonClass: '.popup__button',
@@ -53,19 +54,6 @@ const newProfileAvatarInput = changeProfileAvatarForm.elements.link;
 
 const popupDeleteCard = document.querySelector('.popup_type_confirm-delete');
 const deleteCardForm = document.forms.delete_place;
-
-const cardUX = (evt, handler) => {
-  const submitButton = evt.target.querySelector('.popup__button');
-  const tempValue = submitButton.textContent;
-  submitButton.textContent = "Сохранение...";
-  return handler(evt).finally(() => {
-    submitButton.textContent = tempValue;
-  });
-}
-
-const defaultUX = (evt, handler) => {
-  return handler(evt);
-}
 
 function editProfileHandler(evt) {
   evt.preventDefault();
@@ -166,14 +154,11 @@ popupCloseButton.forEach((button) => {
   });
 });
 
-async function submitHandler(evt, handler, template = defaultUX) {
-  try {
-    await template(evt, handler);
-  } catch(err) {
+function submitHandler(evt, handler, template = defaultUX) {
+  template(evt, handler)
+  .catch(err => {
     console.log(err);
-  } finally {
-
-  }
+  });
 }
 
 profileEditButton.addEventListener('click', openPopupEdit);

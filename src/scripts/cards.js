@@ -3,7 +3,7 @@ const cardTamplate = document.querySelector('#card-template').content;
 const profileSection = document.querySelector('.profile');
 
 function createCard(cardDate, delElement, likeCard, openImg) {
-  const cardElement = cardTamplate.querySelector('.places__item').cloneNode(true);
+  const cardElement = getCardTemplate();
   cardElement.dataset.cardId = cardDate._id;
   const cardImg = cardElement.querySelector('.card__image');
   cardImg.src = cardDate.link;
@@ -27,18 +27,22 @@ function createCard(cardDate, delElement, likeCard, openImg) {
   return cardElement;
 }
 
-async function likeCardHandler(evt, cardElement) {
+function getCardTemplate() {
+  return cardTamplate.querySelector('.places__item').cloneNode(true);
+}
+
+function likeCardHandler(evt, cardElement) {
   const id = cardElement.dataset.cardId;
-  try {
-    if(cardElement.querySelector('.card__like-button_is-active') === null) {
-      await addLike(id, cardElement);
-    } else {
-      await removeLike(id, cardElement);
-    }
-    evt.target.classList.toggle('card__like-button_is-active');
-  } catch (err) {
-    console.log(err);
+  if(cardElement.querySelector('.card__like-button_is-active') === null) {
+    addLike(id, cardElement).catch(err => { 
+      console.log(err); 
+    });
+  } else {
+    removeLike(id, cardElement).catch(err => { 
+      console.log(err); 
+    });
   }
+  evt.target.classList.toggle('card__like-button_is-active');
 }
 
 function addLike(id, cardElement) {
