@@ -7,7 +7,7 @@
     "build": "webpack --mode production",
     "dev": "webpack serve",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist -r git@github.com:KarabulkaGlad/mesto-project-ff.git"
+    "deploy": "gh-pages -d dist -r git@github-KarabulkaGlad:KarabulkaGlad/mesto-project-ff.git"
   },
   "author": "",
   "license": "ISC",
