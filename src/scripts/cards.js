@@ -34,15 +34,20 @@ function getCardTemplate() {
 function likeCardHandler(evt, cardElement) {
   const id = cardElement.dataset.cardId;
   if(cardElement.querySelector('.card__like-button_is-active') === null) {
-    addLike(id, cardElement).catch(err => { 
+    addLike(id, cardElement).then(() => {
+      evt.target.classList.toggle('card__like-button_is-active');
+    })
+    .catch(err => { 
       console.log(err); 
     });
   } else {
-    removeLike(id, cardElement).catch(err => { 
+    removeLike(id, cardElement).then(() => {
+      evt.target.classList.toggle('card__like-button_is-active');
+    })
+    .catch(err => { 
       console.log(err); 
     });
   }
-  evt.target.classList.toggle('card__like-button_is-active');
 }
 
 function addLike(id, cardElement) {
